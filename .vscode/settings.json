@@ -1,6 +1,9 @@
 {
-    "cSpell.words": [],
+    "cSpell.words": [
+        "GitHub"
+    ],
     "spellchecker.ignoreWordsList": [
-        "userChromeJS"
+        "userChromeJS",
+        "GitHub"
     ]
 }
