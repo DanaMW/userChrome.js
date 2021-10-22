@@ -1,103 +1,104 @@
-# Einleitung
-Hier entsteht eine Sammlung von Firefox userChromeJS Scripten.
+# Introduction
+Here is a collection of Firefox userChromeJS scripts.
 
-Fast alle Scripte wurden im deutschen Firefox-Forum vorgestellt bzw. dort angepasst.
+Almost all scripts were presented or adapted there in the German Firefox forum.
 
-Für GitHub werden die Skripte in Unterordnern mit entsprechenden README-Dateien abgelegt. Es handelt sich dabei um 
-Textdateien im markdown-Format mit der Dateiendung `md`. Screenshots bis zum 30.09.2017 wurden im Firefox 57 erstellt. 
-Die Ergebnisse der für neuere Firefox-Versionen aktualisierten Skripte sehen vielleicht ein wenig anders aus. Die Screenshots 
-werden nur bei extremen Unterschieden aktualisiert. 
+For GitHub, the scripts are stored in sub-folders with the corresponding README files. It's about
+Text files in markdown format with the file extension `md`. Screenshots up to 09/30/2017 were created in Firefox 57.
+The results of the scripts updated for newer Firefox versions may look a little different. The screenshots
+are only updated if there are extreme differences.
 
-### userChrome Scripte -  Verwendung in Firefox    
+### userChrome scripts - use in Firefox
 
-##### Herunterladen und Entpacken der ZIP-Datei: firefox-anpassungen.zip
+##### Download and unzip the ZIP file: firefox-anpassungen.zip
 
-#### Das Archiv enthält folgendes:   
+#### The archive contains the following:
 
-  #### 1. Unterverzeichnis userChromeJS mit den Dateien   
+  #### 1. UserChromeJS subdirectory with the files
    * main.js
    * utilities.js
    * Readme.txt
 
-  #### 2. Unterverzeichnis chrome mit der Datei     
+  #### 2. Chrome subdirectory with the file
    * userChrome.js
 
-  #### 3. Datei config.js   
+  #### 3. Config.js file
 
-  #### 4. Datei config-prefs.js  
+  #### 4. Config-prefs.js file
 
-  #### Hinweis:
-  Damit diese Methode ab Firefox 62 funktioniert, muss das mit Firefox 62 eingeführte    
-  Sandboxing der AutoConfig deaktiviert werden. Dazu musste in der Datei config-prefs.js    
-  folgende Zeile eingefügt werden:  
-  ```CSS
+  #### Note:
+  For this method to work from Firefox 62 onwards, the one introduced with Firefox 62 must be
+   AutoConfig sandboxing must be deactivated. To do this, the config-prefs.js
+   insert the following line:
+   `` CSS
   pref("general.config.sandbox_enabled", false);
-  ``` 
-    
-![Screenshot](https://github.com/Endor8/userChrome.js/blob/master/userChrome/images/Warnung.png?raw=true)     
-  **Jedem sollte aber klar sein, dass die Verwendung der Scripte tendenziell unsicher(er) ist!**    
-  **Verwendung immer nur auf eigene Gefahr - eigenes Risiko!**    
-  **Es wird keinerlei Haftung übernommen!**    
-  
-#### Direkter Download: **⇒** [firefox-anpassungen.zip](https://raw.githubusercontent.com/Endor8/userChrome.js/master/userChrome/Dateien/firefox-anpassungen.zip)
+  ```
 
-##### Wo müssen die Dateien hin
+![Screenshot](https://github.com/Endor8/userChrome.js/blob/master/userChrome/images/Warnung.png?raw=true)
+  ** However, it should be clear to everyone that the use of the scripts tends to be (er) unsafe! **
+   ** Use only at your own risk - your own risk! **
+   ** No liability is accepted! **
 
-Die Datei **config.js** und der Ordner **userChromeJS** müssen in den **Firefox Installationsordner**
+#### Direct download: ** ⇒ ** [firefox-anpassungen.zip] (https://raw.githubusercontent.com/Endor8/userChrome.js/master/userChrome/Dateien/firefox-anpassungen.zip)
 
-![Screenshot](https://github.com/Endor8/userChrome.js/blob/master/userChrome/images/Screenshot4-400px.png?raw=true)  
+##### Where do the files have to go?
+
+The ** config.js ** file and the ** userChromeJS ** folder must be placed in the ** Firefox installation folder **
+
+![Screenshot](https://github.com/Endor8/userChrome.js/blob/master/userChrome/images/Screenshot4-400px.png?raw=true)
 [vergrößern](https://github.com/Endor8/userChrome.js/blob/master/userChrome/images/Screenshot4-600px.png?raw=true)
 
-Die Datei **config-prefs.js** muss in den **Firefox Installationsordner\defaults\pref**
+The file ** config-prefs.js ** must be in the ** Firefox installation folder \ defaults \ pref **
 
-![Screenshot](https://github.com/Endor8/userChrome.js/blob/master/userChrome/images/Screenshot5-400px.png?raw=true)     
+![Screenshot](https://github.com/Endor8/userChrome.js/blob/master/userChrome/images/Screenshot5-400px.png?raw=true)
 [vergrößern](https://github.com/Endor8/userChrome.js/blob/master/userChrome/images/Screenshot5-600px.png?raw=true)
 
-##### Wo finde ich den Firefox Installationsordner
+##### Where can I find the Firefox installation folder
 
-Unter **C:\Program Files\Mozilla Firefox (bei 64bit)**
+Under ** C:\Program Files\Mozilla Firefox (at 64bit) **
 
-oder 
-**C:\Program Files (x86)\Mozilla Firefox (bei 32bit)**
+or
+** C:\Program Files (x86)\Mozilla Firefox (at 32bit) **
 
-oder 
-**Portable_Firefox\Firefox** beim portablen Firefox von [hier](https://mozhelp.dynvpn.de/dateien/index.php?path=Programme/)
+or
+** Portable_Firefox\Firefox ** for portable Firefox from [here] (https://mozhelp.dynvpn.de/daten/index.php?path=Programme/)
 
-In den **Profilordner\chrome** gehört die Datei:
-**userChrome.js**
+The file belongs in the ** profile folder\chrome **:
+** userChrome.js **
 
-![Screenshot](https://github.com/Endor8/userChrome.js/blob/master/userChrome/images/Screenshot2-400px.png?raw=true)   
+![Screenshot](https://github.com/Endor8/userChrome.js/blob/master/userChrome/images/Screenshot2-400px.png?raw=true)
 [vergrößern](https://github.com/Endor8/userChrome.js/blob/master/userChrome/images/Screenshot2-600px.png?raw=true)
 
-![Screenshot](https://github.com/Endor8/userChrome.js/blob/master/userChrome/images/Screenshot1-400px.png?raw=true)      
+![Screenshot](https://github.com/Endor8/userChrome.js/blob/master/userChrome/images/Screenshot1-400px.png?raw=true)
 [vergrößern](https://github.com/Endor8/userChrome.js/blob/master/userChrome/images/Screenshot1-600px.png?raw=true)
 
-**Der Profilordner ist gewöhnlich zu finden unter:**
+** The profile folder can usually be found at: **
 
-**%appdata%\Mozilla\Firefox\Profiles\xxx.default**                                     
-(xxx steht für eine zufällige Zeichenfolge und ist bei jedem anders)
+**% appdata% \ Mozilla \ Firefox \ Profiles \ xxx.default **
+(xxx stands for a random sequence of characters and is different for everyone)
 
-oder
-**Portable_Firefox\Profilordner** beim portablen Firefox von [hier](https://mozhelp.dynvpn.de/dateien/index.php?path=Programme/)
-   
-###### Datei ist hier auch zum Herunterladen verfügbar:
+or
+** Portable_Firefox \ Profile folder ** for portable Firefox from [here] (https://mozhelp.dynvpn.de/daten/index.php?path=Programme/)
+
+###### The file is also available for download here:
 https://github.com/Endor8/userChrome.js/tree/master/userChrome/Dateien
 
-###### Eine aktuelle Sammlung von Scripten gibt es hier:
+###### A current collection of scripts is available here:
 https://github.com/ardiman/userChrome.js
 
-###### Informationen und Hilfe siehe hier:
+###### Information and help can be found here:
 https://www.camp-firefox.de/forum/viewtopic.php?f=16&t=112673
 
-### Hier ein Video zur Verwendung der Scripte
+### Here is a video on how to use the scripts
 
 https://user-images.githubusercontent.com/1267601/120994091-75bf1680-c784-11eb-8896-8e756049dfe9.mp4
-   
-Video freundlicher Weise von [Zitronella](https://www.camp-firefox.de/forum/thema/132699-videoanleitung-f%C3%BCr-userchrome-css-usercontent-css-vorbereitung-skripte/?postID=1173160#post1173160) zur Verfügung gestellt.
+
+Video friendly way of [Zitronella](https://www.camp-firefox.de/forum/thema/132699-videoanleitung-f%C3%BCr-userchrome-css-usercontent-css-vorbereitung-skripte/?postID=1173160#post1173160) made available.
 
 
-### Scriptquellen
+### Script sources
 - https://www.camp-firefox.de/forum/viewtopic.php?f=16&t=100898
+- https://github.com/danamw/userChrome.js
 - https://github.com/ardiman/userChrome.js
 - https://github.com/alice0775/userChrome.js
 - https://github.com/sdavidg/firefoxChromeScripts
