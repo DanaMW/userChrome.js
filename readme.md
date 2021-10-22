@@ -92,7 +92,7 @@ https://www.camp-firefox.de/forum/viewtopic.php?f=16&t=112673
 
 https://user-images.githubusercontent.com/1267601/120994091-75bf1680-c784-11eb-8896-8e756049dfe9.mp4
 
-Video friendly way of [Zitronella](https://www.camp-firefox.de/forum/thema/132699-videoanleitung-f%C3%BCr-userchrome-css-usercontent-css-vorbereitung-skripte/?postID=1173160#post1173160) made available.
+Video friendly way of [citronella](https://www.camp-firefox.de/forum/thema/132699-videoanleitung-f%C3%BCr-userchrome-css-usercontent-css-vorbereitung-skripte/?postID=1173160#post1173160) made available.
 
 ### Script sources
 
