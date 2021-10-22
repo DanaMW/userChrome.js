@@ -74,11 +74,11 @@ The file belongs in the ** profile folder\chrome **:
 
 ** The profile folder can usually be found at: **
 
-**% appdata% \ Mozilla \ Firefox \ Profiles \ xxx.default **
+** %appdata%\Mozilla\Firefox\Profiles\xxx.default **
 (xxx stands for a random sequence of characters and is different for everyone)
 
 or
-** Portable_Firefox \ Profile folder ** for portable Firefox from [here] (https://mozhelp.dynvpn.de/daten/index.php?path=Programme/)
+** Portable_Firefox\Profile folder ** for portable Firefox from [here] (https://mozhelp.dynvpn.de/daten/index.php?path=Programme/)
 
 ###### The file is also available for download here:
 https://github.com/Endor8/userChrome.js/tree/master/userChrome/Dateien
