@@ -1,14 +1,14 @@
-# Einleitung
-Hier entsteht eine Sammlung von Firefox userChromeJS Scripten.
+# Introduction
+   Here is a collection of Firefox userChromeJS scripts.
 
-Fast alle Scripte wurden im deutschen Firefox-Forum vorgestellt bzw. dort angepasst.
+Almost all scripts were presented or adapted there in the German Firefox forum.
 
-Für GitHub werden die Skripte in Unterordnern mit entsprechenden README-Dateien abgelegt. Es handelt sich dabei um 
-Textdateien im markdown-Format mit der Dateiendung `md`. Screenshots bis zum 30.09.2011 wurden im Firefox 6 erstellt. 
-Die Ergebnisse der für neuere Firefox-Versionen aktualisierten Skripte sehen vielleicht ein wenig anders aus. Die Screenshots 
-werden nur bei extremen Unterschieden aktualisiert. 
+For GitHub, the scripts are stored in sub-folders with the corresponding README files. It's about
+Text files in markdown format with the file extension `md`. Screenshots up to 09/30/2011 were created in Firefox 6.
+The results of the scripts updated for newer Firefox versions may look a little different. The screenshots
+are only updated if there are extreme differences.
 
-# Testumgebung/Historie
+# Test environment/History
 - Win 7 64bit SP 1/ Firefox 37 (ab 31.03.2015)
 - Win 7 64bit SP 1/ Firefox 36 (ab 25.02.2015)
 - Win 7 64bit SP 1/ Firefox 35 (ab 15.01.2015)
@@ -42,49 +42,48 @@ werden nur bei extremen Unterschieden aktualisiert.
 - Win XP SP 3/ Firefox 7 (ab 01.10.2011)
 - Win XP SP 3/ Firefox 6 (bis 30.09.2011)
 
-Sollte ein Skript nicht funktionieren, bitte im Quelltext nachschauen, was in der jeweiligen Firefoxversion angepasst 
-werden muss bzw. in der Historie des Skriptes stöbern.
+If a script does not work, please look in the source text to see what has been adapted in the respective Firefox version
+must be or rummage in the history of the script.
 
 # Installation
-Zur Aktivierung der Skripte im Firefox muss 
+To activate the scripts in Firefox you have to
 
-- die **Erweiterung userChromeJS** installiert und lauffähig sein
-- eine **Datei namens userChrome.js** für den Import der Skripte sorgen (weiter unten dazu mehr)
-- das jeweilige Skript in den Chrome-Ordner des Profils kopiert werden. Die Skripte sollten am besten in der Ansicht des Skriptes über den **Raw-Button oberhalb des Quelltextes** runtergeladen werden.
+- the ** extension userChromeJS ** must be installed and executable
+- a ** file called userChrome.js ** is used to import the scripts (more on this below)
+- the respective script can be copied into the Chrome folder of the profile. The scripts should best be downloaded in the script view via the ** Raw button above the source text **.
 
-Das Einbinden der `uc.js`- und `uc.xul`-Dateien geschieht mit der beigelegten userChrome.js. Diese Datei (bitte nicht mit 
-der Erweiterung verwechseln) muss ebenfalls in den Chrome-Ordner des Profils eingefügt werden. Die Zeile
+Including the `uc.js`- and `uc.xul`-Files happens with the enclosed userChrome.js. This file (please do not include confuse the extension) must also be added to the profile's Chrome folder. The line
 
     userChrome.import("*", "UChrm");
 
-darin sorgt für den Import aller userChrome-Skripte.
+it takes care of the import of all userChrome scripts.
 
 # Downloads
-- die benötigte **Erweiterung** userChromeJS: http://userchromejs.mozdev.org/
-- eine beispielhafte **Datei** userChrome.js: https://github.com/ardiman/userChrome.js/blob/master/userChrome.js
+- the required ** extension ** userChromeJS: http://userchromejs.mozdev.org/
+- an exemplary ** file ** userChrome.js: https://github.com/danamw/userChrome.js/blob/master/userChrome.js
 
-# Hinweise
-## Skriptcache
-Seit Firefox 8.0 gibt es eine Art Skriptcache. Dies führt dazu, dass Änderungen von Skripten (Konfiguration/Texte usw.) nach 
-einem "normalen" Neustart nicht aktiv werden. Es gibt Skripte, die dieses Problem durch Löschen des Skriptcaches lösen können:
+# Hints
+## Script cache
+Since Firefox 8.0 there is a kind of script cache. This leads to changes in scripts (configuration/texts etc.) after a "normal" restart will not be active.There are scripts that can solve this problem by clearing the script cache:
 
-- https://github.com/ardiman/userChrome.js/tree/master/addrestartbutton
-- https://github.com/ardiman/userChrome.js/tree/master/restartfirefox
-- https://github.com/ardiman/userChrome.js/tree/master/restartfirefoxbutton
+- https://github.com/danamw/userChrome.js/tree/master/addrestartbutton
+- https://github.com/danamw/userChrome.js/tree/master/restartfirefox
+- https://github.com/danamw/userChrome.js/tree/master/restartfirefoxbutton
 
-Andere Methoden werden auf der [Seite Skriptcache im Wiki](https://github.com/ardiman/userChrome.js/wiki/Skriptcache) erläutert.
+Other methods are explained on the [Script cache page on the Wiki] (https://github.com/danamw/userChrome.js/wiki/Skriptcache).
 
-## Umlaute
-Ab userChromeJS 1.5 werden Umlaute in den uc.js-Dateien anders behandelt. Am Anfang des Aufbaus dieser Sammlung war userChromeJS 1.4 aktuell 
-, deshalb kann es Probleme mit der Darstellung von Sonderzeichen geben (s. [Thread im deutschen Firefoxforum](http://www.camp-firefox.de/forum/viewtopic.php?p=832387#p832387)).
+## Umlauts
+As of userChromeJS 1.5, umlauts are handled differently in the uc.js files. At the beginning of the construction of this collection userChromeJS 1.4 was current
+, so there may be problems with the display of special characters (see [thread in the German Firefox forum] (http://www.camp-firefox.de/forum/viewtopic.php?p=832387#p832387)).
 
-Mögliche Lösungen:
+Possible solutions:
 
-- das Skript wird in z.B. Notepad++ als "UTF8 ohne BOM" gespeichert
-- die Umlaute werden mit dem Notepad++-Plugin "HTML Tag" konvertiert
+- the script is saved in e.g. Notepad ++ as "UTF8 without BOM"
+- the umlauts are converted with the Notepad ++ plugin "HTML Tag"
 
-# Quellen
+# Sources
 - https://www.camp-firefox.de/forum/viewtopic.php?f=16&t=100898
+- https://github.com/danamw/userChrome.js
 - https://github.com/ardiman/userChrome.js
 - https://github.com/alice0775/userChrome.js
 - https://github.com/sdavidg/firefoxChromeScripts
