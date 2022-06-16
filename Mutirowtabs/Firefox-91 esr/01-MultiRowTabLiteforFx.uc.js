@@ -30,7 +30,7 @@ function MultiRowTabLiteforFx() {
 
     /* Mehrzeilige Tableiste */
     box.scrollbox-clip[orient="horizontal"] { display: block; }
-    scrollbox[part][orient="horizontal"] {
+    box.scrollbox-clip > scrollbox[orient="horizontal"] {
         display: flex;
         flex-wrap: wrap; }
     .tabbrowser-tab[fadein]:not([pinned]) { flex-grow: 1; }
@@ -43,11 +43,12 @@ function MultiRowTabLiteforFx() {
     .tabbrowser-tab:not([fadein]) { display: none !important; }
 
     /* --- Ziehbereich der Tab-Leiste --- */
+    
     /* Anpassung */
     hbox.titlebar-spacer[type="pre-tabs"] { width: 0px !important; } /* Linker Ziehbereich: Standard 40px  */
     hbox.titlebar-spacer[type="post-tabs"] { width: 0px !important; } /* Rechter Ziehbereich: Standard 40px  */
     /* ↓ Wenn Sie die linke und rechte Seite des CSS-Codes auskommentieren und den CSS-Code aktivieren, 
-       können Sie den Ziehbereich links einblenden, der beim Maximieren des Fensters ausgeblendet wird. 
+       können Sie den Ziehbereich links einblenden, der beim Maximieren des Fensters ausgeblendet wird. */
     /* :root:not([sizemode="normal"]) hbox.titlebar-spacer[type="pre-tabs"] { display: block !important; } */
 
     /* ↓Wenn Sie die Auskommentierung links und rechts von unten stehenden CSS-Code entfernen und den CSS-Code 
@@ -70,6 +71,7 @@ function MultiRowTabLiteforFx() {
     // Tabbar scrollIntoView
     gBrowser.tabContainer.addEventListener("dragend", function(event) {event.target.scrollIntoView({behavior: "instant", block: "nearest", inline: "nearest"})}, true);
     gBrowser.tabContainer.addEventListener("SSTabRestoring", function(event) {event.target.scrollIntoView({behavior: "instant", block: "nearest", inline: "nearest"})}, true);
+    gBrowser.tabContainer.addEventListener("TabOpen", function(event) {event.target.scrollIntoView({behavior: "instant", block: "nearest", inline: "nearest"})}, true);
     gBrowser.tabContainer.addEventListener("TabSelect", function(event) {event.target.scrollIntoView({behavior: "instant", block: "nearest", inline: "nearest"})}, true);
 
     // drag & drop & DropIndicator

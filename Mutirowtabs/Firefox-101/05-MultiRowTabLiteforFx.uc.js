@@ -3,7 +3,7 @@
 // @namespace      http://space.geocities.yahoo.co.jp/gl/alice0775
 // @description    Experimentelle CSS Version für Mehrzeilige Tableiste
 // @include        main
-// @compatibility  Firefox 95
+// @compatibility  Firefox 101
 // @author         Alice0775
 // @version        2016/08/05 00:00 Firefox 48
 // @version        2016/05/01 00:01 hide favicon if busy
@@ -17,47 +17,54 @@ function MultiRowTabLiteforFx() {
 
     var css =` @-moz-document url-prefix("chrome://browser/content/browser.xhtml") {
 
+    /* Symbolleiste Sortieren */
+    #toolbar-menubar { -moz-box-ordinal-group: 1; } /* Menüleiste */
+    #nav-bar         { -moz-box-ordinal-group: 2; } /* Navigationsleiste */
+    #PersonalToolbar { -moz-box-ordinal-group: 3; } /* Lesezeichenleiste */
+
     /* Anpassung der Symbolleiste */
-    :root[tabsintitlebar][sizemode="maximized"] #navigator-toolbox { padding-top: 8px !important; }
     #titlebar,#tabbrowser-tabs { -moz-appearance: none !important; }
-    #titlebar { border-top: 1px solid var(--chrome-content-separator-color); }
+    #titlebar { border-top: 1px solid var(--chrome-content-separator-color) !important; }
 
     /* Anpassung für Titelleistenschaltflächen */
     #nav-bar > .titlebar-buttonbox-container .titlebar-button { width: 46px !important; }
-    #toolbar-menubar:not([inactive]) ~ #nav-bar:not([inFullscreen="true"]) > .titlebar-buttonbox-container { display: none !important; }
+    #toolbar-menubar:not([inactive]) ~ #nav-bar:not([inFullscreen]) > .titlebar-buttonbox-container { display: none !important; }
 
     /* Ich habe versucht, die Tableiste im Vollbildmodus auszublenden und anzuzeigen, indem ich die Maus über den oberen und unteren Bildschirmrand bewegte.
-        Wenn Sie mit der Maus über den oberen Bildschirmrand fahren, wird die Tableiste zusammen mit der Symbolleiste angezeigt.
-        Wenn Sie mit der Maus über den unteren Bildschirmrand fahren, wird nur die Tableiste angezeigt.  */
-    #titlebar #TabsToolbar[inFullscreen="true"] { max-height: 0 !important; }
-    #titlebar:hover #TabsToolbar[inFullscreen="true"],
-    box:hover ~ #titlebar #TabsToolbar[inFullscreen="true"] { max-height: 100% !important; }
+       Wenn Sie mit der Maus über den oberen Bildschirmrand fahren, wird die Tableiste zusammen mit der Symbolleiste angezeigt.
+       Wenn Sie mit der Maus über den unteren Bildschirmrand fahren, wird nur die Tableiste angezeigt. */
+    #titlebar #TabsToolbar[inFullscreen] { max-height: 0 !important; }
+    #navigator-toolbox-background:hover ~ #titlebar #TabsToolbar[inFullscreen],
+    #titlebar:hover #TabsToolbar[inFullscreen] { max-height: 100% !important; }
 
     /* Mehrzeilige Tableiste */
-    box.scrollbox-clip[orient="horizontal"] { display: block; }
+    box.scrollbox-clip[orient="horizontal"] { display: block !important; }
     box.scrollbox-clip > scrollbox[orient="horizontal"] {
-        display: flex;
-        flex-wrap: wrap;
-        margin-bottom: 1px; }
-    .tabbrowser-tab[fadein]:not([pinned]) { flex-grow: 1; }
+        display: flex !important;
+        flex-wrap: wrap !important;
+        margin-bottom: 1px !important; }
+    .tabbrowser-tab[fadein]:not([pinned]) { flex-grow: 1 !important; }
     .tabbrowser-tab,#tabs-newtab-button { height: calc(8px + var(--tab-min-height)); }
-    .tabbrowser-tab > .tab-stack { width: 100%; }
+    .tabbrowser-tab > .tab-stack { width: 100% !important; }
     #tabs-newtab-button { margin: 0 !important; }
 
     /* Ausblenden - Verstecken */
     .tabbrowser-tab:not([fadein]) { display: none !important; }
 
     /* --- Ziehbereich der Tab-Leiste --- */
+    
     /* Anpassung */
     hbox.titlebar-spacer[type="pre-tabs"] { width: 0px !important; } /* Linker Ziehbereich: Standard 40px  */
     hbox.titlebar-spacer[type="post-tabs"] { width: 0px !important; } /* Rechter Ziehbereich: Standard 40px  */
+    
     /* ↓ Wenn Sie die Auskommentierung links und rechts von unten stehenden CSS-Code entfernen und den CSS-Code aktivieren, 
        können Sie den Ziehbereich links einblenden, der beim Maximieren des Fensters ausgeblendet wird.  */
     /* :root:not([sizemode="normal"]) hbox.titlebar-spacer[type="pre-tabs"] { display: block !important; } */
 
-    /* ↓ Wenn Sie die Auskommentierung links und rechts von unten stehenden CSS-Code entfernen und den CSS-Code aktivieren, können Sie den linken und rechten Ziehbereich einblenden, der im Vollbildmodus ausgeblendet wird. */
+    /* ↓ Wenn Sie die Auskommentierung links und rechts von unten stehenden CSS-Code entfernen und den CSS-Code aktivieren, 
+	     können Sie den linken und rechten Ziehbereich einblenden, der im Vollbildmodus ausgeblendet wird. */
     /* :root[inFullscreen] .titlebar-spacer { display: block !important; } */
-    
+
     /* --- Tableiste mit Script an den unterern Rand des Browserfensters verschieben --- */
 
     /* Da das Theme nicht funktionierte, habe ich den CSS-Code, der benötigt wird, um es zum Laufen zu bringen,
@@ -349,26 +356,37 @@ function MultiRowTabLiteforFx() {
       } else if (draggedTab) {
         // Move the tabs. To avoid multiple tab-switches in the original window,
         // the selected tab should be adopted last.
-        let dropIndex = this._getDropIndex(event, false);
+        const dropIndex = this._getDropIndex(event, false);
         let newIndex = dropIndex;
-        let selectedIndex = -1;
+        let selectedTab;
+        let indexForSelectedTab;
         for (let i = 0; i < movingTabs.length; ++i) {
-          let tab = movingTabs[i];
+          const tab = movingTabs[i];
           if (tab.selected) {
-            selectedIndex = i;
+            selectedTab = tab;
+            indexForSelectedTab = newIndex;
           } else {
-            gBrowser.adoptTab(tab, newIndex++, tab == draggedTab);
+            const newTab = gBrowser.adoptTab(tab, newIndex, tab == draggedTab);
+            if (newTab) {
+              ++newIndex;
+            }
           }
         }
-        if (selectedIndex >= 0) {
-          let tab = movingTabs[selectedIndex];
-          gBrowser.adoptTab(tab, dropIndex + selectedIndex, tab == draggedTab);
+        if (selectedTab) {
+          const newTab = gBrowser.adoptTab(
+            selectedTab,
+            indexForSelectedTab,
+            selectedTab == draggedTab
+          );
+          if (newTab) {
+            ++newIndex;
+          }
         }
 
         // Restore tab selection
         gBrowser.addRangeToMultiSelectedTabs(
           gBrowser.tabs[dropIndex],
-          gBrowser.tabs[dropIndex + movingTabs.length - 1]
+          gBrowser.tabs[newIndex - 1]
         );
       } else {
         // Pass true to disallow dropping javascript: or data: urls

@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name			Find in Searchbar Highlight By Mouse
-// @description		Suche in der Suchleiste + Suchmarkierung
-// @include			chrome://browser/content/browser.xul
+// @description		        Suche in der Suchleiste + Suchmarkierung
+// @include			chrome://browser/content/browser.xhtml
 // @charset			UTF-8
-// @compatibility	60.*
-// @note			Find in Searchbar Highlight（作者:yosuke）の改造版
+// @compatibility	        60.*
+// @note			Find in Searchbar Highlight（Autor:yosuke）Modifizierte Version
 // ==/UserScript==
 
 /* ===Überblick=========
@@ -181,7 +181,7 @@ Verschiedene Funktionen können individuell eingestellt werden, indem der Wert v
     }
     
     // ✓Schaltfläche Einstellungen
-    var newButton = document.createElement("toolbarbutton");
+    var newButton = document.createXULElement("toolbarbutton");
     newButton.setAttribute("label", "Alle Markierungen");
     newButton.setAttribute("tooltiptext", "Alle Markierungen hervorheben");
     newButton.setAttribute("id", "toggle-all-highlight");

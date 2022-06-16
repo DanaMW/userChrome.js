@@ -45,7 +45,7 @@ function MultiRowTabLiteforFx() {
 
     /* Mehrzeilige Tableiste */
     box.scrollbox-clip[orient="horizontal"] { display: block; }
-    scrollbox[part][orient="horizontal"] {
+    box.scrollbox-clip > scrollbox[orient="horizontal"] {
         display: flex;
         flex-wrap: wrap;
         max-height: calc(calc(8px + var(--tab-min-height)) * 5); /* Anzahl der Tabzeilen(Standard = 5 Zeilen) */
@@ -58,14 +58,11 @@ function MultiRowTabLiteforFx() {
     .tabbrowser-tab > .tab-stack { width: 100%; }
     #tabs-newtab-button { margin: 0 !important; }
 
-    /* Bei Überschreitung der angegebenen Zeilenanzahl, mit der Maus,    
-	   über die dann eingeblendetet Scrolleiste zur gewünschten Zeile wechseln */
-    scrollbox[part][orient="horizontal"] > scrollbar { -moz-window-dragging: no-drag; }
-
     /* Ausblenden - Verstecken */
     .tabbrowser-tab:not([fadein]) { display: none !important; }
 
     /* --- Ziehbereich der Tab-Leiste --- */
+    
     /* Anpassung */
     hbox.titlebar-spacer[type="pre-tabs"] { width: 0px !important; } /* Linker Ziehbereich: Standard 40px  */
     hbox.titlebar-spacer[type="post-tabs"] { width: 0px !important; } /* Rechter Ziehbereich: Standard 40px  */
@@ -114,6 +111,17 @@ aus browser.css Datei entnommen und # navigator-toolbox in #titlebar geändert�
     } `;
     var sss = Cc['@mozilla.org/content/style-sheet-service;1'].getService(Ci.nsIStyleSheetService);
     var uri = makeURI('data:text/css;charset=UTF=8,' + encodeURIComponent(css));
+    sss.loadAndRegisterSheet(uri, sss.USER_SHEET);
+
+    var css =` @-moz-document url-prefix("chrome://browser/content/browser.xhtml") {
+
+    /* Bei Überschreitung der angegebenen Zeilenanzahl, mit der Maus,    
+	   über die dann eingeblendetet Scrolleiste zur gewünschten Zeile wechseln */
+    scrollbox[part][orient="horizontal"] > scrollbar { -moz-window-dragging: no-drag; }
+
+    } `;
+    var sss = Cc['@mozilla.org/content/style-sheet-service;1'].getService(Ci.nsIStyleSheetService);
+    var uri = makeURI('data:text/css;charset=UTF=8,' + encodeURIComponent(css));
     sss.loadAndRegisterSheet(uri, sss.AGENT_SHEET);
 
     if(location.href !== 'chrome://browser/content/browser.xhtml') return;
@@ -136,6 +144,7 @@ aus browser.css Datei entnommen und # navigator-toolbox in #titlebar geändert�
     // Tabbar scrollIntoView
     gBrowser.tabContainer.addEventListener("dragend", function(event) {event.target.scrollIntoView({behavior: "instant", block: "nearest", inline: "nearest"})}, true);
     gBrowser.tabContainer.addEventListener("SSTabRestoring", function(event) {event.target.scrollIntoView({behavior: "instant", block: "nearest", inline: "nearest"})}, true);
+    gBrowser.tabContainer.addEventListener("TabOpen", function(event) {event.target.scrollIntoView({behavior: "instant", block: "nearest", inline: "nearest"})}, true);
     gBrowser.tabContainer.addEventListener("TabSelect", function(event) {event.target.scrollIntoView({behavior: "instant", block: "nearest", inline: "nearest"})}, true);
 
     // drag & drop & DropIndicator

@@ -17,80 +17,41 @@ function MultiRowTabLiteforFx() {
 
     var css =` @-moz-document url-prefix("chrome://browser/content/browser.xhtml") {
 
+    /* Symbolleiste Sortieren */
+    #titlebar { -moz-box-ordinal-group: 2; }
+
     /* Anpassung der Symbolleiste */
     :root[tabsintitlebar][sizemode="maximized"] #navigator-toolbox { padding-top: 8px !important; }
     #titlebar,#tabbrowser-tabs { -moz-appearance: none !important; }
-    #titlebar { border-top: 1px solid var(--chrome-content-separator-color); }
 
     /* Anpassung für Titelleistenschaltflächen */
     #nav-bar > .titlebar-buttonbox-container .titlebar-button { width: 46px !important; }
-    #toolbar-menubar:not([inactive]) ~ #nav-bar:not([inFullscreen="true"]) > .titlebar-buttonbox-container { display: none !important; }
-
-    /* Ich habe versucht, die Tableiste im Vollbildmodus auszublenden und anzuzeigen, indem ich die Maus über den oberen und unteren Bildschirmrand bewegte.
-        Wenn Sie mit der Maus über den oberen Bildschirmrand fahren, wird die Tableiste zusammen mit der Symbolleiste angezeigt.
-        Wenn Sie mit der Maus über den unteren Bildschirmrand fahren, wird nur die Tableiste angezeigt.  */
-    #titlebar #TabsToolbar[inFullscreen="true"] { max-height: 0 !important; }
-    #titlebar:hover #TabsToolbar[inFullscreen="true"],
-    box:hover ~ #titlebar #TabsToolbar[inFullscreen="true"] { max-height: 100% !important; }
+    #toolbar-menubar:not([inactive]) ~ #nav-bar:not([inFullscreen]) > .titlebar-buttonbox-container { display: none !important; }
 
     /* Mehrzeilige Tableiste */
-    box.scrollbox-clip[orient="horizontal"] { display: block; }
+    box.scrollbox-clip[orient="horizontal"] { display: block !important; }
     box.scrollbox-clip > scrollbox[orient="horizontal"] {
-        display: flex;
-        flex-wrap: wrap;
-        margin-bottom: 1px; }
-    .tabbrowser-tab[fadein]:not([pinned]) { flex-grow: 1; }
+        display: flex !important;
+        flex-wrap: wrap !important; }
+    .tabbrowser-tab[fadein]:not([pinned]) { flex-grow: 1 !important; }
     .tabbrowser-tab,#tabs-newtab-button { height: calc(8px + var(--tab-min-height)); }
-    .tabbrowser-tab > .tab-stack { width: 100%; }
+    .tabbrowser-tab > .tab-stack { width: 100% !important; }
     #tabs-newtab-button { margin: 0 !important; }
 
     /* Ausblenden - Verstecken */
     .tabbrowser-tab:not([fadein]) { display: none !important; }
 
     /* --- Ziehbereich der Tab-Leiste --- */
+    
     /* Anpassung */
     hbox.titlebar-spacer[type="pre-tabs"] { width: 0px !important; } /* Linker Ziehbereich: Standard 40px  */
     hbox.titlebar-spacer[type="post-tabs"] { width: 0px !important; } /* Rechter Ziehbereich: Standard 40px  */
     /* ↓ Wenn Sie die Auskommentierung links und rechts von unten stehenden CSS-Code entfernen und den CSS-Code aktivieren, 
-       können Sie den Ziehbereich links einblenden, der beim Maximieren des Fensters ausgeblendet wird.  */
+       können Sie den Ziehbereich links einblenden, der beim Maximieren des Fensters ausgeblendet wird. */
     /* :root:not([sizemode="normal"]) hbox.titlebar-spacer[type="pre-tabs"] { display: block !important; } */
 
-    /* ↓ Wenn Sie die Auskommentierung links und rechts von unten stehenden CSS-Code entfernen und den CSS-Code aktivieren, können Sie den linken und rechten Ziehbereich einblenden, der im Vollbildmodus ausgeblendet wird. */
+    /* ↓ Wenn Sie die Auskommentierung links und rechts von unten stehenden CSS-Code entfernen und den CSS-Code aktivieren, können Sie den linken und rechten Ziehbereich einblenden, der im Vollbildmodus ausgeblendet wird.   */
     /* :root[inFullscreen] .titlebar-spacer { display: block !important; } */
-    
-    /* --- Tableiste mit Script an den unterern Rand des Browserfensters verschieben --- */
-
-    /* Da das Theme nicht funktionierte, habe ich den CSS-Code, der benötigt wird, um es zum Laufen zu bringen,
-       von browser.css übernommen und # navigator-toolbox in #titlebar geändert und hinzugefügt. */
-    #titlebar:-moz-lwtheme {
-        background-image: var(--lwt-additional-images);
-        background-repeat: var(--lwt-background-tiling);
-        background-position: var(--lwt-background-alignment);
-    }
-
-    /* TODO bug 1695280: Remove these media selectors and merge the rule below
-       with the ruleset above. We must set background properties on :root and not
-       #navigator-toolbox on Windows 7/8 due to a WebRender bug that hides the
-       minimize/maximize/close buttons. */
-    @media not (-moz-os-version: windows-win7) {
-        @media not (-moz-os-version: windows-win8) {
-            #titlebar:-moz-lwtheme {
-                background-color: var(--lwt-accent-color);
-            }
-
-            /* When a theme defines both theme_frame and additional_backgrounds, show
-               the latter atop the former. */
-            :root[lwtheme-image] #titlebar {
-                background-image: var(--lwt-header-image), var(--lwt-additional-images);
-                background-repeat: no-repeat, var(--lwt-background-tiling);
-                background-position: right top, var(--lwt-background-alignment);
-            }
-
-            #titlebar:-moz-window-inactive:-moz-lwtheme {
-                background-color: var(--lwt-accent-color-inactive, var(--lwt-accent-color));
-            }
-        }
-    }
 
     } `;
     var sss = Cc['@mozilla.org/content/style-sheet-service;1'].getService(Ci.nsIStyleSheetService);
@@ -99,13 +60,10 @@ function MultiRowTabLiteforFx() {
 
     if(location.href !== 'chrome://browser/content/browser.xhtml') return;
 
-    // Menüleiste an den oberen Rand der Symbolleiste verschieben
-    document.getElementById("titlebar").parentNode.insertBefore(document.getElementById("toolbar-menubar"),document.getElementById("nav-bar"));
+    // Verschieben Sie die Menüleiste an den oberen Rand der Symbolleiste 
+    document.getElementById("titlebar").parentNode.insertBefore(document.getElementById("toolbar-menubar"),document.getElementById("titlebar"));
 
     // Titelleisten Schaltflächen in die Tableiste an den Rechten Rand verschieben
-    document.body.appendChild(document.getElementById("titlebar"));
-
-    // Titelleistenschaltflächen aus der Tableiste, rechts neben die Navigationsleiste verschieben
     document.getElementById("nav-bar").appendChild(document.querySelector("#TabsToolbar .titlebar-buttonbox-container"));
 
     // Scroll-Buttons und Spacer in der Tab-Leiste ausblenden shadowRoot 
@@ -349,26 +307,37 @@ function MultiRowTabLiteforFx() {
       } else if (draggedTab) {
         // Move the tabs. To avoid multiple tab-switches in the original window,
         // the selected tab should be adopted last.
-        let dropIndex = this._getDropIndex(event, false);
+        const dropIndex = this._getDropIndex(event, false);
         let newIndex = dropIndex;
-        let selectedIndex = -1;
+        let selectedTab;
+        let indexForSelectedTab;
         for (let i = 0; i < movingTabs.length; ++i) {
-          let tab = movingTabs[i];
+          const tab = movingTabs[i];
           if (tab.selected) {
-            selectedIndex = i;
+            selectedTab = tab;
+            indexForSelectedTab = newIndex;
           } else {
-            gBrowser.adoptTab(tab, newIndex++, tab == draggedTab);
+            const newTab = gBrowser.adoptTab(tab, newIndex, tab == draggedTab);
+            if (newTab) {
+              ++newIndex;
+            }
           }
         }
-        if (selectedIndex >= 0) {
-          let tab = movingTabs[selectedIndex];
-          gBrowser.adoptTab(tab, dropIndex + selectedIndex, tab == draggedTab);
+        if (selectedTab) {
+          const newTab = gBrowser.adoptTab(
+            selectedTab,
+            indexForSelectedTab,
+            selectedTab == draggedTab
+          );
+          if (newTab) {
+            ++newIndex;
+          }
         }
 
         // Restore tab selection
         gBrowser.addRangeToMultiSelectedTabs(
           gBrowser.tabs[dropIndex],
-          gBrowser.tabs[dropIndex + movingTabs.length - 1]
+          gBrowser.tabs[newIndex - 1]
         );
       } else {
         // Pass true to disallow dropping javascript: or data: urls
