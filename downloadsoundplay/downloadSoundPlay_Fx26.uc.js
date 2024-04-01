@@ -1,10 +1,12 @@
 // ==UserScript==
 // @name           downloadSoundPlay_Fx26.uc.js
 // @namespace      http://space.geocities.yahoo.co.jp/gl/alice0775
-// @description    ダウンロードマネージャー用のダウンロードを監視し音を鳴らす
+// @description    Downloads überwachen und Ton Dateien für Download-Manager abspielen
 // @include        main
-// @compatibility  Firefox 26
+// @compatibility  Firefox 115
 // @author         Alice0775
+// @version        2023/10/13 use ChromeUtils.import instead of XPCOMUtils.defineLazyModuleGetter
+// @version        2016/03/15 hack of selection chanhe
 // @version        2015/01/15 1:00 Fixed strictmode
 // @version        2013/12/18 11:00 defineLazyModuleGetter for Firefox26
 // @version        2013/12/18 Firefox26
@@ -13,21 +15,21 @@
 
 var downloadPlaySound = {
   // -- config --
-  DL_START : null,
+  DL_START : "file:///C:/WINDOWS/Media/tada.wav",
   DL_DONE  : "file:///C:/WINDOWS/Media/chimes.wav",
-  DL_CANCEL: null,
-  DL_FAILED: null,
+  DL_CANCEL: "file:///C:/WINDOWS/Media/Windows%20Logoff%20Sound.wav",
+  DL_FAILED: "file:///C:/WINDOWS/Media/Windows%20Error.wav",
   // -- config --
 
   _list: null,
   init: function sampleDownload_init() {
-    XPCOMUtils.defineLazyModuleGetter(window, "Downloads",
-              "resource://gre/modules/Downloads.jsm");
+    const { Downloads } = ChromeUtils.import(
+    "resource://gre/modules/Downloads.jsm");
 
     //window.removeEventListener("load", this, false);
     window.addEventListener("unload", this, false);
 
-    //**** ダウンロード監視の追加
+    //**** Download-Überwachung hinzufügen
     if (!this._list) {
       Downloads.getList(Downloads.ALL).then(list => {
         this._list = list;
@@ -44,21 +46,24 @@ var downloadPlaySound = {
   },
 
   onDownloadAdded: function (aDownload) {
-    //**** ダウンロード開始イベント
+    //**** Startereignis herunterladen
     if (this.DL_START)
       this.playSoundFile(this.DL_START);
   },
 
   onDownloadChanged: function (aDownload) {
-    //**** ダウンロードキャンセル
+    //**** Download abbrechen
     if (aDownload.canceled && this.DL_CANCEL)
       this.playSoundFile(this.DL_CANCEL)
-    //**** ダウンロード失敗
+    //**** Herunterladen fehlgeschlagen
     if (aDownload.error && this.DL_FAILED)
       this.playSoundFile(this.DL_FAILED)
-    //**** ダウンロード完了
-    if (aDownload.succeeded && this.DL_DONE)
-      this.playSoundFile(this.DL_DONE)
+    //**** Download abgeschlossen
+    if (typeof aDownload.downloadPlaySound == "undefined" &&
+        aDownload.succeeded && aDownload.stopped && this.DL_DONE) {
+      aDownload.downloadPlaySound = true;
+      this.playSoundFile(this.DL_DONE);
+    }
   },
 
   playSoundFile: function(aFilePath) {
